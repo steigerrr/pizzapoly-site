@@ -99,6 +99,56 @@
             justify-content: center;
             color: #888;
         }
+
+        .screenshot-lightbox-trigger {
+            cursor: zoom-in;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .screenshot-lightbox-trigger:hover {
+            transform: scale(1.03);
+            filter: brightness(1.08);
+        }
+
+        .screenshot-lightbox-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.9);
+            cursor: zoom-out;
+        }
+
+        .screenshot-lightbox-overlay.active {
+            display: flex;
+        }
+
+        .screenshot-lightbox-image {
+            max-width: 95vw;
+            max-height: 90vh;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(255, 107, 53, 0.45);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.75);
+            animation: screenshotZoomIn 0.18s ease-out;
+        }
+
+        body.lightbox-open {
+            overflow: hidden;
+        }
+
+        @keyframes screenshotZoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
     </style>
 </head>
 <body class="bg-black text-white overflow-x-hidden">
@@ -351,35 +401,35 @@
             
             <div class="grid md:grid-cols-2 gap-6">
   <figure class="overflow-hidden rounded-xl border border-orange-500/30 bg-white/5">
-    <img src="images/SS1.png" alt="In-game screenshot 1" class="w-full aspect-video object-cover">
+    <img src="images/SS1.png" alt="In-game screenshot 1" class="screenshot-lightbox-trigger w-full aspect-video object-cover">
   </figure>
 
   <figure class="overflow-hidden rounded-xl border border-orange-500/30 bg-white/5">
-    <img src="images/SS2.png" alt="In-game screenshot 2" class="w-full aspect-video object-cover">
+    <img src="images/SS2.png" alt="In-game screenshot 2" class="screenshot-lightbox-trigger w-full aspect-video object-cover">
   </figure>
 
   <figure class="overflow-hidden rounded-xl border border-orange-500/30 bg-white/5">
-    <img src="images/SS3.png" alt="In-game screenshot 3" class="w-full aspect-video object-cover">
+    <img src="images/SS3.png" alt="In-game screenshot 3" class="screenshot-lightbox-trigger w-full aspect-video object-cover">
   </figure>
 
   <figure class="overflow-hidden rounded-xl border border-orange-500/30 bg-white/5">
-    <img src="images/SS4.png" alt="In-game screenshot 4" class="w-full aspect-video object-cover">
+    <img src="images/SS4.png" alt="In-game screenshot 4" class="screenshot-lightbox-trigger w-full aspect-video object-cover">
   </figure>
 
   <figure class="overflow-hidden rounded-xl border border-orange-500/30 bg-white/5">
-    <img src="images/SS5.png" alt="In-game screenshot 5" class="w-full aspect-video object-cover">
+    <img src="images/SS5.png" alt="In-game screenshot 5" class="screenshot-lightbox-trigger w-full aspect-video object-cover">
   </figure>
 
   <figure class="overflow-hidden rounded-xl border border-orange-500/30 bg-white/5">
-    <img src="images/SS6.png" alt="In-game screenshot 6" class="w-full aspect-video object-cover">
+    <img src="images/SS6.png" alt="In-game screenshot 6" class="screenshot-lightbox-trigger w-full aspect-video object-cover">
   </figure>
 
   <figure class="overflow-hidden rounded-xl border border-orange-500/30 bg-white/5">
-    <img src="images/SS7.png" alt="In-game screenshot 7" class="w-full aspect-video object-cover">
+    <img src="images/SS7.png" alt="In-game screenshot 7" class="screenshot-lightbox-trigger w-full aspect-video object-cover">
   </figure>
 
   <figure class="overflow-hidden rounded-xl border border-orange-500/30 bg-white/5">
-    <img src="images/SS8.png" alt="In-game screenshot 8" class="w-full aspect-video object-cover">
+    <img src="images/SS8.png" alt="In-game screenshot 8" class="screenshot-lightbox-trigger w-full aspect-video object-cover">
   </figure>
 </div>
 
@@ -424,6 +474,12 @@
         </div>
     </footer>
 
+
+    <!-- Screenshot Lightbox -->
+    <div id="screenshotLightbox" class="screenshot-lightbox-overlay" aria-hidden="true">
+        <img id="screenshotLightboxImage" class="screenshot-lightbox-image" src="" alt="Expanded screenshot">
+    </div>
+
     <!-- Smooth Scroll Script -->
     <script>
         // Smooth scroll for navigation
@@ -441,6 +497,36 @@
                 }
             });
         });
+
+        // Screenshot lightbox
+        const screenshotLightbox = document.getElementById('screenshotLightbox');
+        const screenshotLightboxImage = document.getElementById('screenshotLightboxImage');
+
+        function closeScreenshotLightbox() {
+            screenshotLightbox.classList.remove('active');
+            screenshotLightbox.setAttribute('aria-hidden', 'true');
+            screenshotLightboxImage.src = '';
+            document.body.classList.remove('lightbox-open');
+        }
+
+        document.querySelectorAll('.screenshot-lightbox-trigger').forEach(image => {
+            image.addEventListener('click', function () {
+                screenshotLightboxImage.src = this.src;
+                screenshotLightboxImage.alt = this.alt;
+                screenshotLightbox.classList.add('active');
+                screenshotLightbox.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('lightbox-open');
+            });
+        });
+
+        screenshotLightbox.addEventListener('click', closeScreenshotLightbox);
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && screenshotLightbox.classList.contains('active')) {
+                closeScreenshotLightbox();
+            }
+        });
+
     </script>
 
 </body>
