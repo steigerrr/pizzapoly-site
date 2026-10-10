@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0a0a0a">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+    body{font-family:'Space Grotesk',sans-serif;background:#080809;color:#fff}
+    .accent{background:linear-gradient(110deg,#ff6b35,#ffb547);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .panel{background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));border:1px solid rgba(255,255,255,.1)}
+    .btn{background:linear-gradient(120deg,#ff6b35,#ffad33);color:#111;font-weight:700;padding:.85rem 1.5rem;border-radius:.75rem;display:inline-flex;justify-content:center;align-items:center;transition:filter .2s}
+    .btn:hover{filter:brightness(1.1)}
+    .field{width:100%;background:#151518;border:1px solid #414149;color:white;border-radius:.65rem;padding:.85rem 1rem;outline:none}
+    .field:focus{border-color:#fb923c;box-shadow:0 0 0 2px rgba(251,146,60,.15)}
+  </style>
+  <title>Feedback | Pizzapoly</title>
+</head>
+<body class="min-h-screen flex flex-col">
+  <nav class="sticky top-0 z-50 bg-black/85 backdrop-blur-md border-b border-white/10">
+    <div class="max-w-6xl mx-auto px-5 py-4 flex flex-wrap items-center justify-between gap-4">
+      <a href="/" class="flex items-center gap-3 font-bold tracking-wide"><img src="/PizzapolyNewIcon.png" alt="Pizzapoly" class="h-11 w-auto" onerror="this.style.display='none'">PIZZAPOLY</a>
+      <div class="flex items-center gap-5 text-sm sm:text-base"><a href="/" class="text-gray-300 hover:text-orange-400">Home</a><a href="/feedback" class="text-gray-300 hover:text-orange-400">Feedback</a><a href="/roadmap" class="text-gray-300 hover:text-orange-400">Roadmap</a></div>
+    </div>
+  </nav>
+  <main class="w-full max-w-5xl mx-auto px-5 py-16 md:py-24 flex-1">
+    <div class="max-w-3xl"><p class="uppercase tracking-[.3em] text-orange-400 text-xs font-bold mb-5">Help shape the game</p><h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6">Your voice.<br><span class="accent">Our next move.</span></h1><p class="text-gray-400 text-lg leading-relaxed">Found a bug? Have an idea? Tell us what would make Pizzapoly better. We read your feedback as we continue developing the game.</p></div>
+    <div class="grid lg:grid-cols-[1.55fr_1fr] gap-7 mt-14">
+      <section class="panel rounded-2xl p-6 md:p-9"><h2 class="font-bold text-2xl mb-2">Send us feedback</h2><p class="text-sm text-gray-400 mb-8">Your message will be sent directly to the Pizzapoly development team.</p>
+        <form id="feedback-form" class="space-y-5">
+          <div><label for="name" class="block text-sm font-semibold mb-2">Name</label><input id="name" name="name" type="text" autocomplete="name" class="field" maxlength="100" placeholder="Your name" required></div>
+          <div><label for="email" class="block text-sm font-semibold mb-2">Email</label><input id="email" name="email" type="email" autocomplete="email" class="field" maxlength="254" placeholder="you@example.com" required></div>
+          <div><label for="message" class="block text-sm font-semibold mb-2">Feedback</label><textarea id="message" name="message" class="field min-h-44 resize-y" minlength="10" maxlength="5000" placeholder="Tell us what you think about Pizzapoly..." required></textarea></div>
+          <div class="hidden" aria-hidden="true"><label for="website">Website (leave blank)</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+          <p class="text-xs text-gray-500">We use your email only to respond to your feedback. Do not include passwords or other sensitive information.</p>
+          <button id="submit-feedback" type="submit" class="btn w-full sm:w-auto">Submit Feedback</button>
+          <p id="form-status" role="status" aria-live="polite" class="text-sm min-h-5"></p>
+        </form>
+      </section>
+      <aside class="space-y-6"><div class="panel p-7 rounded-2xl"><div class="text-orange-400 font-bold mb-3">What helps us most?</div><p class="text-gray-400 leading-relaxed">For bugs, include what you were doing, whether you were hosting or joining, and the steps to reproduce the issue.</p></div><div class="panel p-7 rounded-2xl"><div class="font-bold mb-3">Prefer Discord?</div><p class="text-gray-400 mb-5">Join the community to discuss suggestions and share your experiences with other players.</p><a class="text-orange-400 hover:text-orange-300 font-semibold" href="https://discord.gg/pizzapoly" target="_blank" rel="noopener noreferrer">Join the Pizzapoly Discord ↗</a></div><div class="panel p-7 rounded-2xl"><div class="font-bold mb-3">What's coming next?</div><p class="text-gray-400 mb-4">Explore our development direction and planned features.</p><a class="text-orange-400 hover:text-orange-300 font-semibold" href="/roadmap">View the roadmap →</a></div></aside>
+    </div>
+  </main>
+  <script>
+    const form = document.getElementById('feedback-form');
+    const button = document.getElementById('submit-feedback');
+    const status = document.getElementById('form-status');
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      button.disabled = true;
+      button.textContent = 'Sending...';
+      button.classList.add('opacity-60', 'cursor-not-allowed');
+      status.textContent = '';
+      try {
+        const response = await fetch('/api/feedback', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            name: document.getElementById('name').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            message: document.getElementById('message').value.trim(),
+            website: document.getElementById('website').value
+          })
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(result.error || 'Unable to send feedback. Please try again.');
+        status.textContent = 'Thank you! Your feedback has been sent.';
+        status.className = 'text-sm min-h-5 text-green-400';
+        form.reset();
+      } catch (error) {
+        status.textContent = error.message || 'Unable to send feedback. Please try again.';
+        status.className = 'text-sm min-h-5 text-red-400';
+      } finally {
+        button.disabled = false;
+        button.textContent = 'Submit Feedback';
+        button.classList.remove('opacity-60', 'cursor-not-allowed');
+      }
+    });
+  </script>
+
+  <footer class="mt-auto border-t border-white/10 px-5 py-8 text-sm text-gray-500">
+    <div class="max-w-6xl mx-auto flex flex-wrap gap-4 justify-between"><span>© 2026 PIZZAPOLY — All rights reserved.</span><a href="mailto:admin@polytan.games" class="hover:text-white">admin@polytan.games</a></div>
+  </footer>
+</body></html>
