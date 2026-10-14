@@ -31,6 +31,7 @@ for (const [language, name] of languages) {
       return esc(data[group][i].replaceAll('{n}', n || '{n}'));
     });
     html = html.replace('<html lang="en">', `<html lang="${language}">`);
+    html = html.replace('<head>', '<head><script src="/assets/language.js"></script>');
     // Keep internal navigation within the current language. API and assets stay at root.
     html = html.replace(/href="\/(roadmap|feedback)?"/g, (_, dest) => `href="${url(language,dest || '')}"`);
     const canonical = 'https://polytan.games' + url(language, route);

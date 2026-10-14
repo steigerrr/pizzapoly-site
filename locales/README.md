@@ -15,7 +15,7 @@ node scripts/build-locales.cjs
 node --test tests/localization.test.cjs
 ```
 
-Commit the generated HTML and sitemap with the source changes. Vercel serves the committed pages directly; it needs no dependencies or build configuration. The generator fails if a catalog has missing or empty translations. No browser translation service, automatic redirect, or geolocation is used. The language picker preserves the current route and remains functional without JavaScript.
+Commit the generated HTML and sitemap with the source changes. Vercel serves the committed pages directly; it needs no dependencies or build configuration. The generator fails if a catalog has missing or empty translations. No browser translation service or geolocation is used. Neutral English entry routes detect browser language before rendering; a manual language-menu choice is remembered in localStorage. Direct language-prefixed URLs remain authoritative. The language picker preserves the current route and remains functional without JavaScript.
 
 ## Scope
 
