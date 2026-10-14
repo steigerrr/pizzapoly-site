@@ -1,13 +1,13 @@
 # Pizzapoly site design
 
-This pass consolidates the existing Pizzapoly identity across Home, Roadmap and Feedback. The logo, existing promotional art, gameplay images, orange accent, dark palette, English content and external destinations remain the source of truth.
+This system consolidates the existing Pizzapoly identity across Home, Roadmap and Feedback. The logo, existing promotional art, gameplay images, orange accent, dark palette, original product claims and external destinations remain the source of truth.
 
 ## Shared implementation
 
 - `/assets/site.css` contains the palette, typography, spacing, responsive layouts and interaction states.
 - `/assets/site.js` contains navigation and accessible screenshot dialog behavior.
 - All three HTML routes use identical header and footer markup. Set `aria-current="page"` on the active navigation link.
-- No frontend build step or framework is required. Feedback continues to call the existing `/api/feedback` Vercel function.
+- Vercel serves committed static HTML without a frontend framework. After changing a template or translation, run `node scripts/build-locales.cjs`. Feedback continues to call the existing `/api/feedback` Vercel function.
 
 ## Visual rules
 
@@ -24,3 +24,7 @@ The content width is 1160px. Navigation, page titles and footer align to the sam
 ## Accessibility
 
 Keyboard-visible focus, skip navigation, reduced-motion support, 44px social targets, a native dialog with Escape dismissal and automatic focus restoration. Mobile navigation is available without JavaScript and collapses only after its controller has initialized.
+
+## Languages
+
+Fifteen language catalogs in `/locales` generate 45 static pages from `/templates`. English retains the existing root routes; other languages use a prefix. Every page has a language picker that retains the current route and exposes all languages by native name. On narrow screens its trigger uses the language code to leave room for the brand and menu. Translations, canonical URLs, alternate-language metadata, image alternatives and feedback messages are generated together. CJK headings use natural line height; long translations can wrap. Navigation collapses at 960px to accommodate expanded labels.

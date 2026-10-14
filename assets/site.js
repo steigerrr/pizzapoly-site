@@ -7,7 +7,7 @@ if (header && toggle && navigation) {
   function setMenu(open, restoreFocus = false) {
     navigation.classList.toggle('is-open', open);
     toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+    toggle.setAttribute('aria-label', open ? toggle.dataset.closeLabel : toggle.dataset.openLabel);
     if (restoreFocus) toggle.focus();
   }
   toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
@@ -15,7 +15,20 @@ if (header && toggle && navigation) {
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') setMenu(false, true);
   });
-  window.matchMedia('(min-width: 701px)').addEventListener('change', () => setMenu(false));
+  window.matchMedia('(min-width: 961px)').addEventListener('change', () => setMenu(false));
+}
+
+const languages = document.querySelector('.language-switcher');
+if (languages) {
+  document.addEventListener('click', event => {
+    if (!languages.contains(event.target)) languages.open = false;
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && languages.open) {
+      languages.open = false;
+      languages.querySelector('summary').focus();
+    }
+  });
 }
 
 const lightbox = document.querySelector('#screenshot-lightbox');

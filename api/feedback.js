@@ -5,7 +5,8 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed.' });
   const contentType = (req.headers['content-type'] || '').split(';')[0].trim().toLowerCase();
   if (contentType !== 'application/json') return res.status(415).json({ error: 'Use application/json.' });
-  if (Number(req.headers['content-length'] || 0) > 12000) return res.status(413).json({ error: 'Feedback is too long.' });
+  // A valid 5,000-character message can exceed 12 KB in Chinese/Japanese/Korean.
+  if (Number(req.headers['content-length'] || 0) > 40000) return res.status(413).json({ error: 'Feedback is too long.' });
 
   let body = req.body || {};
   if (typeof body === 'string') {

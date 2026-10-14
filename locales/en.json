@@ -1,0 +1,50 @@
+{
+  "common": ["Skip to content", "Pizzapoly home", "Open navigation menu", "Close navigation menu", "Menu", "Main navigation", "Home", "Roadmap", "Feedback", "Contact us", "Back to the game", "Footer navigation", "© 2026 PIZZAPOLY — All rights reserved.", "Made with Unity", "Language", "Choose language", "Pizzapoly social channels", "Game information"],
+  "home": [
+    "Pizzapoly - Chaotic Co-op Pizza Simulator",
+    "Pizzapoly is a 1–4 player online co-op pizza restaurant simulator. Take orders, cook, clean and deliver. Wishlist on Steam.",
+    "ONE KITCHEN.", "FOUR ROLES.", "TOTAL CHAOS.",
+    "1–4 player chaotic co-op pizza restaurant simulator. Take orders, cook, clean, deliver. Survive under pressure.",
+    "Wishlist on Steam", "Watch trailer", "1–4 players", "Online co-op", "Restaurant simulator",
+    "What kind of game?",
+    "A realistic restaurant simulator where you manage every aspect of running a pizza business. From order handling to inventory management, cleaning to delivery routes — experience the full chaos of restaurant operations.",
+    "Core game loop", "Take orders", "Customer requests start pouring in. Tempo rises as complexity and volume increase.",
+    "Prep & cook", "Dough, ingredients, correct recipe. Don't miss oven timers — every second counts!",
+    "Deliver", "Package, deadline, correct address. Late delivery means rating drops.",
+    "Clean & restock", "Dirty stations slow production. Out of stock means business stops. Everything's in your hands.",
+    "Game features", "Tempo & pressure", "Simple actions become tense during rush hours. Think fast, act faster.",
+    "Co-op coordination", "4 roles: Prep, Oven, Packaging, Cleaning. Teamwork is key to survival.",
+    "Reputation system", "Every order affects your rating. Stay fast and accurate to earn better reviews, unlock upgrades, and grow the business.",
+    "Full restaurant operations", "Inventory management and ingredient ordering", "Station cleaning and maintenance", "Staff management and task distribution", "Financial planning: revenue, costs, upgrades",
+    "In-game screenshots", "Watch the trailer", "Select a screenshot to view it full size.",
+    "The kitchen is yours.", "The chaos is ours.", "Steam demo coming soon. Wishlist to get notified.", "Add to Steam wishlist", "Close screenshot"
+  ],
+  "roadmap": [
+    "Explore the development direction for Pizzapoly: core gameplay, Early Access improvements and the longer-term vision.",
+    "Building the", "next shift.",
+    "Here's the direction we're exploring for Pizzapoly, from the playable core to a bigger restaurant experience. Priorities and scope can change based on development and community feedback.",
+    "Core experience", "Run the restaurant", "The foundation of Pizzapoly's hands-on co-op restaurant gameplay.",
+    "1–4 player online co-op", "Pizza preparation and baking", "Serving and packaging", "Inventory and restocking", "Cleaning and deliveries",
+    "Early Access focus", "Improve every shift", "Areas we intend to refine with player feedback.",
+    "Co-op balance and coordination", "Restaurant workflow improvements", "Difficulty and pacing adjustments", "Progression tuning", "Quality-of-life improvements",
+    "Longer-term vision", "Grow the business", "Ideas and features planned for the broader game experience.",
+    "New neighborhoods and areas", "More recipes and side dishes", "Deeper restaurant management", "Multiple restaurant branches", "Possible property acquisitions",
+    "This is a directional roadmap, not a release schedule or guarantee that every proposed feature will ship.",
+    "What should we prioritize?", "Share your ideas and help shape what comes next.", "Send feedback"
+  ],
+  "feedback": [
+    "Send bug reports and suggestions to the Pizzapoly development team.", "Your voice.", "Our next move.",
+    "Found a bug? Have an idea? Tell us what would make Pizzapoly better. We read your feedback as we continue developing the game.",
+    "Send us feedback", "Your message will be sent directly to the Pizzapoly development team.",
+    "Name", "Your name", "Email", "you@example.com", "Tell us what you think about Pizzapoly...", "Website (leave blank)",
+    "We use your email only to respond to your feedback. Do not include passwords or other sensitive information.",
+    "Submit Feedback", "Feedback guidance", "What helps us most?", "For bugs, include what you were doing, whether you were hosting or joining, and the steps to reproduce the issue.",
+    "Prefer Discord?", "Join the community to discuss suggestions and share your experiences with other players.", "Join the Pizzapoly Discord",
+    "What's coming next?", "Explore our development direction and planned features.", "View the roadmap",
+    "Sending...", "Thank you! Your feedback has been sent.", "Unable to send feedback. Please try again.", "The feedback service is temporarily unavailable. Please try again later or contact us by email.",
+    "Please complete this field.", "Please enter a valid email address.", "Please enter at least 10 characters.", "Please enter a name, a valid email and at least 10 characters of feedback.", "JavaScript is required to send this form. You can also email admin@polytan.games."
+  ],
+  "images": [
+    "Pizzapoly artwork: four chefs trying to keep a chaotic pizza kitchen running", "Pizzapoly gameplay screenshot {n}", "In-game screenshot {n}", "Expand in-game screenshot {n}", "Pizzapoly restaurant gameplay", "A look inside Pizzapoly", "Expanded game screenshot", "Expanded screenshot"
+  ]
+}
